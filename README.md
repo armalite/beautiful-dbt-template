@@ -1,5 +1,5 @@
 # beautiful-dbt-template
-This repository contains a template DBT project that can be used for DBT development.
+This repository contains a template DBT project that can be used for DBT development on Snowflake.
 
 
 ## Environment Setup
@@ -17,6 +17,7 @@ The setup script of this repo uses Python Poetry to handle package management an
       - Your dev warehouse should be called JAFFLE_SHOP_DEV_WH
       - Your dev service account user should be called JAFFLE_SHOP_DEV_SA
       - Your dev admin role should be called JAFFLE_SHOP_DEV_ADMIN
+   - Your service accounts use Private keys for authentication
 
 
 ### Environment Setup Steps (Mac)
@@ -28,13 +29,15 @@ The setup script of this repo uses Python Poetry to handle package management an
  1. Use `cookiecutter` to instantiate this template on your local machine
 
     ```bash
-    cookiecutter git@github.dev.xero.com:Xero/DT.XADE.DBT-Template.git
+    cookiecutter git@github.com:Armalite/beautiful-dbt-template.git
     ```
 
  1. Fill in the information that `cookiecutter` prompts you to add:
     - **Project Name**: The full name of your project. This is used in documentation and to generate a project slug, which for a given "Project Name" looks like "project-name".
     - **Description**: A short description which is used in generated documentation.
     - **Snowflake Account**: The Snowflake account you want your DBT project to connect to.
+    - **Snowflake Username**: The Snowflake username you will connect
+    - **Snowflake Password**: You can set this in an environment variable SNOWFLAKE_PASSWORD and the dbt project will use that for development target(s)
 
 
  1. After filling out this information, cookiecutter will download poetry dependencies, and initialise your instantiated template as a git repository.
