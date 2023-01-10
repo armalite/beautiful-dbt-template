@@ -1,0 +1,121 @@
+default:
+  target: "{{ cookiecutter._TARGET_DEFAULT }}"
+  outputs:
+
+    ### Local Target - dev
+    # Target that combines models under schemas prefixed with DEV_<firstname>_<lastname>
+    # For use with user account locally during development
+    # This target uses your sandbox workspace environment.
+    dev:
+      type: snowflake
+      account: xero.us-east-1
+
+      # browser-based SSO
+      user: "{{ cookiecutter._USER_LOCAL }}"
+      authenticator: externalbrowser
+
+      role: "{{ cookiecutter.__WORKSPACE_SANDBOX_ROLE }}"
+      database: "{{ cookiecutter.__WORKSPACE_SANDBOX_DB }}"
+      warehouse: "{{ cookiecutter.__WORKSPACE_SANDBOX_WH }}"
+      schema: "{{ cookiecutter._SCHEMA_LOCAL }}"
+      threads: 4
+      query_tag: dbt-dev
+
+    ### Local Target - sandbox_local
+    # Target that creates models based on the custom schema names and ignores the
+    # schema name that is specified in profile.yml. This is exactly the same as the 'sandbox'
+    # target further below, but for use locally from your laptop if you wish to manually
+    # combine all your models into the respective schemas specified in each model.
+    # This target uses your sandbox workspace environment.
+    sandbox_local:
+      type: snowflake
+      account: xero.us-east-1
+
+      # browser-based SSO
+      user: "{{ cookiecutter._USER_LOCAL }}"
+      authenticator: externalbrowser
+
+      role: "{{ cookiecutter.__WORKSPACE_SANDBOX_ROLE }}"
+      database: "{{ cookiecutter.__WORKSPACE_SANDBOX_DB }}"
+      warehouse: "{{ cookiecutter.__WORKSPACE_SANDBOX_WH }}"
+      schema: "{{ cookiecutter.WORKSPACE }}"
+      threads: 4
+      query_tag: dbt-dev
+
+    ### CICD Target - sandbox
+    # Target that creates models based on the custom schema names and ignoring the Target
+    # schema names that are specified in the profile.yml targets
+    # This target uses key pair auth
+    # For use with service account via automation tools (Teamcity)
+    sandbox:
+      type: snowflake
+      account: xero.us-east-1.privatelink
+
+      user: "{{ cookiecutter.__WORKSPACE_SANDBOX_SA }}"
+      private_key_path: "{{ cookiecutter._KEY_PATH }}"
+
+      role: "{{ cookiecutter.__WORKSPACE_SANDBOX_ROLE }}"
+      database: "{{ cookiecutter.__WORKSPACE_SANDBOX_DB }}"
+      warehouse: "{{ cookiecutter.__WORKSPACE_SANDBOX_WH }}"
+
+      # This is overwritten by the generate_schema_name macro
+      schema: "{{ cookiecutter.WORKSPACE }}"
+      threads: 4
+      query_tag: dbt-sandbox
+
+    # CICD Target - this is for CI testing in the LAB environment
+    # Models will be created inside schemas that are named based
+    # on the github feature branch. If you wish to do CI testing
+    # in SANDBOX instead, you will need to update all instances
+    # of LAB below with SANDBOX
+    lab_ci:
+      type: snowflake
+      account: xero.us-east-1.privatelink
+
+      user: "{{ cookiecutter.__WORKSPACE_LAB_SA }}"
+      private_key_path: "{{ cookiecutter._KEY_PATH }}"
+
+      role: "{{ cookiecutter.__WORKSPACE_LAB_ROLE }}"
+      database: "{{ cookiecutter.__WORKSPACE_LAB_DB }}"
+      warehouse: "{{ cookiecutter.__WORKSPACE_LAB_WH }}"
+
+      schema: "{{ cookiecutter._SCHEMA_CI }}"
+      threads: 4
+      query_tag: dbt-lab-ci
+
+    # CICD Target - This is for CD deployment into the LAB environment
+    # Models will be created inside schemas named based on the custom schemas
+    # Target schemas set in the profiles.yml file will be ignored (i.e. no contatenation)
+    lab:
+      type: snowflake
+      account: xero.us-east-1.privatelink
+
+      user: "{{ cookiecutter.__WORKSPACE_LAB_SA }}"
+      private_key_path: "{{ cookiecutter._KEY_PATH }}"
+
+      role: "{{ cookiecutter.__WORKSPACE_LAB_ROLE }}"
+      database: "{{ cookiecutter.__WORKSPACE_LAB_DB }}"
+      warehouse: "{{ cookiecutter.__WORKSPACE_LAB_WH }}"
+
+      schema: "{{ cookiecutter.WORKSPACE }}"
+      threads: 4
+      query_tag: dbt-lab-cd
+
+    # CICD Target - This is for CD deployment into the HWAY environment
+    # Models will be created inside schemas named based on the custom schemas
+    # Target schemas set in the profiles.yml file will be ignored (i.e. no contatenation)
+    # Asset registration is enabled for this target
+    hway:
+      type: snowflake
+      account: xero.us-east-1.privatelink
+
+      user: "{{ cookiecutter.__WORKSPACE_HWAY_SA }}"
+      private_key_path: "{{ cookiecutter._KEY_PATH }}"
+
+      role: "{{ cookiecutter.__WORKSPACE_HWAY_ROLE }}"
+      database: "{{ cookiecutter.__WORKSPACE_HWAY_DB }}"
+      warehouse: "{{ cookiecutter.__WORKSPACE_HWAY_WH }}"
+
+      schema: "{{ cookiecutter.WORKSPACE }}"
+      threads: 4
+      query_tag: dbt-hway-cd

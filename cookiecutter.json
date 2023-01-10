@@ -1,0 +1,31 @@
+{
+    "PROJECT_NAME": "Example Project Name",
+    "__PROJECT_SLUG": "{{ cookiecutter.PROJECT_NAME.lower().replace(' ', '-') }}",
+
+    "DESCRIPTION": "Enter a short description...",
+
+    "AUTHOR_NAME": "Enter your first name and last name...",
+
+    "WORKSPACE": "YOURWORKSPACE",
+    "__WORKSPACE_SANDBOX": "{{ cookiecutter.WORKSPACE.upper() }}_SANDBOX",
+    "__WORKSPACE_SANDBOX_SA": "{{ cookiecutter.WORKSPACE.upper() }}_SANDBOX_SA",
+    "__WORKSPACE_SANDBOX_ROLE": "{{ cookiecutter.WORKSPACE.upper() }}_SANDBOX_ADMIN",
+    "__WORKSPACE_SANDBOX_DB": "{{ cookiecutter.WORKSPACE.upper() }}_SANDBOX",
+    "__WORKSPACE_SANDBOX_WH": "{{ cookiecutter.WORKSPACE.upper() }}_SANDBOX_WH",
+    "__WORKSPACE_LAB": "{{ cookiecutter.WORKSPACE.upper() }}_LAB",
+    "__WORKSPACE_LAB_SA": "{{ cookiecutter.WORKSPACE.upper() }}_LAB_SA",
+    "__WORKSPACE_LAB_ROLE" : "{{ cookiecutter.WORKSPACE.upper() }}_LAB_ADMIN",
+    "__WORKSPACE_LAB_DB": "{{ cookiecutter.WORKSPACE.upper() }}_LAB",
+    "__WORKSPACE_LAB_WH": "{{ cookiecutter.WORKSPACE.upper() }}_LAB_WH",
+    "__WORKSPACE_HWAY": "{{ cookiecutter.WORKSPACE.upper() }}_HWAY",
+    "__WORKSPACE_HWAY_SA": "{{ cookiecutter.WORKSPACE.upper() }}_HWAY_SA",
+    "__WORKSPACE_HWAY_ROLE" : "{{ cookiecutter.WORKSPACE.upper() }}_HWAY_ADMIN",
+    "__WORKSPACE_HWAY_DB": "{{ cookiecutter.WORKSPACE.upper() }}_HWAY",
+    "__WORKSPACE_HWAY_WH": "{{ cookiecutter.WORKSPACE.upper() }}_HWAY_WH",
+
+    "_SCHEMA_CI": "CI_{{ env_var('BUILD_BRANCH') | upper }}",
+    "_SCHEMA_LOCAL": "DEV_{{ env_var('USER').split('.')[0] | upper }}_{{ env_var('USER').split('.')[1] | upper }}",
+    "_USER_LOCAL": "{{ env_var('USER') }}@xero.com",
+    "_TARGET_DEFAULT": "{{ env_var('DBT_TARGET', 'dev') }}",
+    "_KEY_PATH": "private.key"
+}
