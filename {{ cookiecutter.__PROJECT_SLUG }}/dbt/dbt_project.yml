@@ -24,4 +24,4 @@ models:
       +materialized: table
 
 
-# Add on-run-end hooks here e.g. for asset registration see https://xero.atlassian.net/wiki/spaces/DATATEAM/pages/269745989347/XTS+-+Asset+Registration+V2+with+DBT
+# Add on-run-end hooks here 
