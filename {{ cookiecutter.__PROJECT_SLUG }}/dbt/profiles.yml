@@ -12,7 +12,7 @@ default:
 
       # browser-based SSO
       user: "{{ cookiecutter._USER_LOCAL }}"
-      authenticator: externalbrowser
+      password: "{{ cookiecutter._SNOWFLAKE_PASSWORD }}"
 
       role: "{{ cookiecutter.__WORKSPACE_DEV_ROLE }}"
       database: "{{ cookiecutter.__WORKSPACE_DEV_DB }}"
