@@ -17,7 +17,8 @@ The setup script of this repo uses Python Poetry to handle package management an
       - Your dev warehouse should be called JAFFLE_SHOP_DEV_WH
       - Your dev service account user should be called JAFFLE_SHOP_DEV_SA
       - Your dev admin role should be called JAFFLE_SHOP_DEV_ADMIN
-   - Your service accounts use Private keys for authentication
+   - Your service accounts can use Private keys for authentication
+      - If Private keys have not been set up, you will need to update the dbt `profiles.yml` file to make sure the non development targets use passwords instead
 
 
 ### Environment Setup Steps (Mac)
@@ -78,7 +79,7 @@ The setup script of this repo uses Python Poetry to handle package management an
  - To align your project with the template dependencies, run `cruft update`
 
 ## DBT Profile Targets
-The dbt target determines the method of Snowflake connectivity DBT will perform, along with other global settings such as how schema naming should happen when models are run. You can set the DBT target in the environment variable `DBT_TARGET` via `export DBT_TARGET=sandbox_dev`. You can view the dbt profile config in `dbt/profiles.yml`
+The dbt target determines the method of Snowflake connectivity DBT will perform, along with other global settings such as how schema naming should happen when models are run. You can set the DBT target in the environment variable `DBT_TARGET` via `export DBT_TARGET=dev`. You can view the dbt profile config in `dbt/profiles.yml`
  - dev
    - This dbt target will enable connectivity via your user account and relies on externalbrowser authentication (just click SSO).
    - This target causes all schemas, by default, to be created under your name prefixed with DEV_. e.g. if your schema settings inside a model definition are set to `FACT`, then these will be created under `DEV_<YOURNAME>_FACT` schema. e.g. `DEV_ADEEB_FACT`
