@@ -8,6 +8,15 @@ The setup script of this repo uses Python Poetry to handle package management an
 ### Prerequisites
  - It is recommended that you work in a Unix environment (i.e. MacOS)
  - Windows machines are also possible but may require further tweaking
+ - This repository assumes your Snowflake environments are set up in a particular structure:
+   - You work in a single instance of Snowflake (e.g. the Prod instance)
+   - Your 'environments' (dev, uat, prod) are simply different databases in the Prod instance
+   - The PROJECT_NAME you supply is used as a prefix to name most of your Snowflake infrastructure resources (database, roles, warehouses)
+   - You have a separate Database and associated infra for dev, uat and prod e.g. if your project name is "JAFFLE SHOP", the dbt profile will be set up assuming the following:
+      - Your dev database should be called JAFFLE_SHOP_DEV
+      - Your dev warehouse should be called JAFFLE_SHOP_DEV_WH
+      - Your dev service account user should be called JAFFLE_SHOP_DEV_SA
+      - Your dev admin role should be called JAFFLE_SHOP_DEV_ADMIN
 
 
 ### Environment Setup Steps (Mac)
@@ -25,7 +34,7 @@ The setup script of this repo uses Python Poetry to handle package management an
  1. Fill in the information that `cookiecutter` prompts you to add:
     - **Project Name**: The full name of your project. This is used in documentation and to generate a project slug, which for a given "Project Name" looks like "project-name".
     - **Description**: A short description which is used in generated documentation.
-    - **Workspace**: The Snowflake workspace for your project. **Do not** include the environment name i.e. `_SANDBOX`.
+    - **Snowflake Account**: The Snowflake account you want your DBT project to connect to.
 
 
  1. After filling out this information, cookiecutter will download poetry dependencies, and initialise your instantiated template as a git repository.
@@ -71,16 +80,12 @@ The dbt target determines the method of Snowflake connectivity DBT will perform,
    - This dbt target will enable connectivity via your user account and relies on externalbrowser authentication (just click SSO).
    - This target causes all schemas, by default, to be created under your name prefixed with DEV_. e.g. if your schema settings inside a model definition are set to `FACT`, then these will be created under `DEV_<YOURNAME>_FACT` schema. e.g. `DEV_ADEEB_FACT`
    - Purpose: This is to enable each engineer to do development, run their models, have tables created, without impacting the objects the other engineers are working on
- - sandbox_local
+ - dev_ci
    - This dbt target will enable connectivity via your user account and relies on externalbrowser authentication (just click SSO).
    - This target ignores the schema name defined in `profiles.yml` and instead only uses the schema specified provided in your model
    - This target is the same as the `sandbox` target below, but is for use locally from your laptop to observe the same behaviour
- - sandbox / lab / hway
+ - uat / prod
    - These are CICD targets and use the sandbox service account to connect to Snowflake
    - These targets are to be used when by an automation tool (e.g. TeamCity) deployment
    - These targets ignore the schema name defined in `profiles.yml` and instead only uses the schema specified provided in your model
 
-## Integrating with XOS
-This template can be used to register `dbt` flows on the XADE Orchestration Service.
-
-Configuration is set in the `xos-deployments.yml` file. **For details on how to setup this integration, follow the [provided User Guide](https://xero.atlassian.net/wiki/spaces/DATATEAM/pages/269755945637/XOS+-+User+Guide+-+Prefect+Deployer)**

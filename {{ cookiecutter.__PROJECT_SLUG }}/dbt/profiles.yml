@@ -24,7 +24,7 @@ default:
     # CICD Target - this is for CI testing in the DEV environment
     # Models will be created inside schemas that are named based
     # on the github feature branch (requires branch name to be stored 
-    # in an env var). 
+    # in BUILD_BRANCH environment variable). 
     dev_ci:
       type: snowflake
       account: "{{ cookiecutter.__SNOWFLAKE_ACCOUNT }}"
