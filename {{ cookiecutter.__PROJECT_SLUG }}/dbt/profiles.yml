@@ -14,9 +14,9 @@ default:
       user: "{{ cookiecutter._USER_LOCAL }}"
       authenticator: externalbrowser
 
-      role: "{{ cookiecutter.__DEV_ROLE }}"
-      database: "{{ cookiecutter.__DEV_DB }}"
-      warehouse: "{{ cookiecutter.__DEV_WH }}"
+      role: "{{ cookiecutter.__WORKSPACE_DEV_ROLE }}"
+      database: "{{ cookiecutter.__WORKSPACE_DEV_DB }}"
+      warehouse: "{{ cookiecutter.__WORKSPACE_DEV_WH }}"
       schema: "{{ cookiecutter._SCHEMA_LOCAL }}"
       threads: 4
       query_tag: dbt-dev
@@ -30,12 +30,12 @@ default:
       type: snowflake
       account: "{{ cookiecutter.__SNOWFLAKE_ACCOUNT }}"
 
-      user: "{{ cookiecutter.__DEV_SA }}"
+      user: "{{ cookiecutter.__WORKSPACE_DEV_SA }}"
       private_key_path: "{{ cookiecutter._KEY_PATH }}"
 
-      role: "{{ cookiecutter.__DEV_ROLE }}"
-      database: "{{ cookiecutter.__DEV_DB }}"
-      warehouse: "{{ cookiecutter.__DEV_CI_WH }}"
+      role: "{{ cookiecutter.__WORKSPACE_DEV_ROLE }}"
+      database: "{{ cookiecutter.__WORKSPACE_DEV_DB }}"
+      warehouse: "{{ cookiecutter.__WORKSPACE_DEV_CI_WH }}"
 
       schema: "{{ cookiecutter._SCHEMA_CI }}"
       threads: 4
@@ -48,12 +48,12 @@ default:
       type: snowflake
       account: "{{ cookiecutter.__SNOWFLAKE_ACCOUNT }}"
 
-      user: "{{ cookiecutter.__UAT_SA }}"
+      user: "{{ cookiecutter.__WORKSPACE_UAT_SA }}"
       private_key_path: "{{ cookiecutter._KEY_PATH }}"
 
-      role: "{{ cookiecutter.__UAT_ROLE }}"
-      database: "{{ cookiecutter.__UAT_DB }}"
-      warehouse: "{{ cookiecutter.__UAT_WH }}"
+      role: "{{ cookiecutter.__WORKSPACE_UAT_ROLE }}"
+      database: "{{ cookiecutter.__WORKSPACE_UAT_DB }}"
+      warehouse: "{{ cookiecutter.__WORKSPACE_UAT_WH }}"
 
       schema: "{{ cookiecutter.WORKSPACE }}"
       threads: 4
@@ -66,12 +66,12 @@ default:
       type: snowflake
       account: "{{ cookiecutter.__SNOWFLAKE_ACCOUNT }}"
 
-      user: "{{ cookiecutter.__PROD_SA }}"
+      user: "{{ cookiecutter.__WORKSPACE_PROD_SA }}"
       private_key_path: "{{ cookiecutter._KEY_PATH }}"
 
-      role: "{{ cookiecutter.__PROD_ROLE }}"
-      database: "{{ cookiecutter.__PROD_DB }}"
-      warehouse: "{{ cookiecutter.__PROD_WH }}"
+      role: "{{ cookiecutter.__WORKSPACE_PROD_ROLE }}"
+      database: "{{ cookiecutter.__WORKSPACE_PROD_DB }}"
+      warehouse: "{{ cookiecutter.__WORKSPACE_PROD_WH }}"
 
       schema: "{{ cookiecutter.WORKSPACE }}"
       threads: 4
