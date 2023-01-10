@@ -28,5 +28,6 @@
     "_SCHEMA_LOCAL": "DEV_{{ cookiecutter.USERNAME }}",
     "_USER_LOCAL": "{{ cookiecutter.USERNAME }}",
     "_TARGET_DEFAULT": "{{ env_var('DBT_TARGET', 'dev') }}",
-    "_KEY_PATH": "private.key"
+    "_KEY_PATH": "private.key",
+    "_SNOWFLAKE_PASSWORD": "{{ env_var('SNOWFLAKE_PASSWORD') }}"
 }
