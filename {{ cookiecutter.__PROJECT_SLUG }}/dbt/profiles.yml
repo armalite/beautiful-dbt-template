@@ -3,12 +3,12 @@ default:
   outputs:
 
     ### Local Target - dev
-    # Target that combines models under schemas prefixed with DEV_<firstname>_<lastname>
+    # Target that combines models under schemas prefixed with DEV_<USERNAME>
     # For use with user account locally during development
-    # This target uses your sandbox workspace environment.
+    # This target uses your dev workspace environment.
     dev:
       type: snowflake
-      account: "{{ cookiecutter.__SNOWFLAKE_ACCOUNT }}"
+      account: "{{ cookiecutter.SNOWFLAKE_ACCOUNT }}"
 
       # browser-based SSO
       user: "{{ cookiecutter._USER_LOCAL }}"
@@ -21,11 +21,10 @@ default:
       threads: 4
       query_tag: dbt-dev
 
-    # CICD Target - this is for CI testing in the LAB environment
+    # CICD Target - this is for CI testing in the DEV environment
     # Models will be created inside schemas that are named based
-    # on the github feature branch. If you wish to do CI testing
-    # in SANDBOX instead, you will need to update all instances
-    # of LAB below with SANDBOX
+    # on the github feature branch (requires branch name to be stored 
+    # in an env var). 
     dev_ci:
       type: snowflake
       account: "{{ cookiecutter.__SNOWFLAKE_ACCOUNT }}"
@@ -41,7 +40,7 @@ default:
       threads: 4
       query_tag: dbt-ci
 
-    # CICD Target - This is for CD deployment into the LAB environment
+    # CICD Target - This is for CD deployment into the UAT environment
     # Models will be created inside schemas named based on the custom schemas
     # Target schemas set in the profiles.yml file will be ignored (i.e. no contatenation)
     uat:
