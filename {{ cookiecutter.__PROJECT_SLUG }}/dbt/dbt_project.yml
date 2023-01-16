@@ -4,7 +4,7 @@ config-version: 2
 
 profile: 'default'
 
-require-dbt-version: [">=1.0.0", "<2.0.0"]
+require-dbt-version: [">=1.4.0", "<2.0.0"]
 
 analysis-paths: ["analysis"]
 test-paths: ["tests"]
