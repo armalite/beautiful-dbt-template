@@ -43,17 +43,17 @@ The setup script of this repo uses Python Poetry to handle package management an
 
  1. After filling out this information, cookiecutter will download poetry dependencies, and initialise your instantiated template as a git repository.
 
-1. *(Optional)* If you would like to track your changes on GitHub, you will need to [create a remote repository on GitHub](https://github.dev.xero.com/new) for your project. Make sure this remote repository is empty (don't add any templates).
+1. *(Optional)* If you would like to track your changes on GitHub, you will need to [create a remote repository on GitHub](https://github.com/new) for your project. Make sure this remote repository is empty (don't add any templates).
 
    Once you have set up your remote repository, you can connect it to your local repository following the steps to "push an existing repository from the command-line". These steps should look something like:
     ```
-    git remote add origin git@github.dev.xero.com:Xero/<repo-name>.git
+    git remote add origin git@github.com:YourUser/<repo-name>.git
     git branch -M main
     git push -u origin main
     ```
-    For example, if my remote repository was https://github.dev.xero.com/Xero/dt-xerogo-transforms, the \<repo-name\> would be `dt-xerogo-transforms` and the command would be:
+    For example, if my remote repository was https://github.com/Armalite/beautiful-dbt-transforms, the \<repo-name\> would be `beautiful-dbt-transforms` and the command would be:
     ```
-    git remote add origin git@github.dev.xero.com:Xero/dt-xerogo-transforms.git
+    git remote add origin git@github.com:Armalite/beautiful-dbt-transforms.git
     git branch -M main
     git push -u origin main
     ```
