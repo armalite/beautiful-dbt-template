@@ -1,0 +1,12 @@
+
+version: 2
+
+models:
+  - name: hway_testmodel_1
+    description: '{"contains_pii": true, "description": "Test Model 1"}'
+    columns:
+      - name: organisationid
+        description: '{"pii": true, "orgid":true, "description":"The primary key for this table. This is a pii column"}'
+        tests:
+          - unique
+          - not_null

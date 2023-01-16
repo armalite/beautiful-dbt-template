@@ -1,0 +1,82 @@
+default:
+  target: "{{ cookiecutter._TARGET_DEFAULT }}"
+  outputs:
+
+    ### Local Target - dev
+    # Target that combines models under schemas prefixed with DEV_<USERNAME>
+    # For use with user account locally during development
+    # This target uses your dev workspace environment.
+    # This target uses your user account and password, which you can set in the 
+    # environment variable: SNOWFLAKE_PASSWORD
+    dev:
+      type: snowflake
+      account: "{{ cookiecutter.SNOWFLAKE_ACCOUNT }}"
+
+      # browser-based SSO
+      user: "{{ cookiecutter._USER_LOCAL }}"
+      password: "{{ cookiecutter._SNOWFLAKE_PASSWORD }}"
+
+      role: "{{ cookiecutter.__WORKSPACE_DEV_ROLE }}"
+      database: "{{ cookiecutter.__WORKSPACE_DEV_DB }}"
+      warehouse: "{{ cookiecutter.__WORKSPACE_DEV_WH }}"
+      schema: "{{ cookiecutter._SCHEMA_LOCAL }}"
+      threads: 4
+      query_tag: dbt-dev
+
+    # CICD Target - this is for CI testing in the DEV environment
+    # Models will be created inside schemas that are named based
+    # on the github feature branch (requires branch name to be stored 
+    # in BUILD_BRANCH environment variable). 
+    # This target relies on the use of a service account user and private key auth
+    dev_ci:
+      type: snowflake
+      account: "{{ cookiecutter.__SNOWFLAKE_ACCOUNT }}"
+
+      user: "{{ cookiecutter.__WORKSPACE_DEV_SA }}"
+      private_key_path: "{{ cookiecutter._KEY_PATH }}"
+
+      role: "{{ cookiecutter.__WORKSPACE_DEV_ROLE }}"
+      database: "{{ cookiecutter.__WORKSPACE_DEV_DB }}"
+      warehouse: "{{ cookiecutter.__WORKSPACE_DEV_CI_WH }}"
+
+      schema: "{{ cookiecutter._SCHEMA_CI }}"
+      threads: 4
+      query_tag: dbt-ci
+
+    # CICD Target - This is for deployment into the UAT environment
+    # Models will be created inside schemas named based on the custom schemas
+    # Project level schema settings in profiles.yml will be ignored (i.e. no contatenation)
+    # This target relies on the use of a service account user and private key auth
+    uat:
+      type: snowflake
+      account: "{{ cookiecutter.__SNOWFLAKE_ACCOUNT }}"
+
+      user: "{{ cookiecutter.__WORKSPACE_UAT_SA }}"
+      private_key_path: "{{ cookiecutter._KEY_PATH }}"
+
+      role: "{{ cookiecutter.__WORKSPACE_UAT_ROLE }}"
+      database: "{{ cookiecutter.__WORKSPACE_UAT_DB }}"
+      warehouse: "{{ cookiecutter.__WORKSPACE_UAT_WH }}"
+
+      schema: "{{ cookiecutter.WORKSPACE }}"
+      threads: 4
+      query_tag: dbt-uat
+
+    # CICD Target - This is for deployment into the PROD environment
+    # Models will be created inside schemas specified in the model configs
+    # Project level schema settings in profiles.yml will be ignored (i.e. no contatenation)
+    # This target relies on the use of a service account user and private key auth
+    prod:
+      type: snowflake
+      account: "{{ cookiecutter.__SNOWFLAKE_ACCOUNT }}"
+
+      user: "{{ cookiecutter.__WORKSPACE_PROD_SA }}"
+      private_key_path: "{{ cookiecutter._KEY_PATH }}"
+
+      role: "{{ cookiecutter.__WORKSPACE_PROD_ROLE }}"
+      database: "{{ cookiecutter.__WORKSPACE_PROD_DB }}"
+      warehouse: "{{ cookiecutter.__WORKSPACE_PROD_WH }}"
+
+      schema: "{{ cookiecutter.WORKSPACE }}"
+      threads: 4
+      query_tag: dbt-prod

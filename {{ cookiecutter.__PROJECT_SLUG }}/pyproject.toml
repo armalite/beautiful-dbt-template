@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "{{ cookiecutter.__PROJECT_SLUG }}"
+version = "0.1.0"
+description = "{{ cookiecutter.DESCRIPTION }}"
+authors = ["{{ cookiecutter.AUTHOR_NAME }} <{{cookiecutter.AUTHOR_NAME.replace('-', '').replace(' ', '.').lower() }}@xero.com>"]
+
+[tool.poetry.dependencies]
+python = "~3.9.0"
+dbt-snowflake = "1.3.0"
+snowflake-connector-python = "2.7.9"
+pytest = "^6.2.5"
+oyaml = "1.0"
+#prefect = "0.15.10"
+
+[tool.poetry.dev-dependencies]
+sqlfluff = "^0.8.0"
+sqlfluff-templater-dbt = "^0.8.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
