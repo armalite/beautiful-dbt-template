@@ -6,6 +6,8 @@ default:
     # Target that combines models under schemas prefixed with DEV_<USERNAME>
     # For use with user account locally during development
     # This target uses your dev workspace environment.
+    # This target uses your user account and password, which you can set in the 
+    # environment variable: SNOWFLAKE_PASSWORD
     dev:
       type: snowflake
       account: "{{ cookiecutter.SNOWFLAKE_ACCOUNT }}"
@@ -25,6 +27,7 @@ default:
     # Models will be created inside schemas that are named based
     # on the github feature branch (requires branch name to be stored 
     # in BUILD_BRANCH environment variable). 
+    # This target relies on the use of a service account user and private key auth
     dev_ci:
       type: snowflake
       account: "{{ cookiecutter.__SNOWFLAKE_ACCOUNT }}"
@@ -40,9 +43,10 @@ default:
       threads: 4
       query_tag: dbt-ci
 
-    # CICD Target - This is for CD deployment into the UAT environment
+    # CICD Target - This is for deployment into the UAT environment
     # Models will be created inside schemas named based on the custom schemas
-    # Target schemas set in the profiles.yml file will be ignored (i.e. no contatenation)
+    # Project level schema settings in profiles.yml will be ignored (i.e. no contatenation)
+    # This target relies on the use of a service account user and private key auth
     uat:
       type: snowflake
       account: "{{ cookiecutter.__SNOWFLAKE_ACCOUNT }}"
@@ -58,9 +62,10 @@ default:
       threads: 4
       query_tag: dbt-uat
 
-    # CICD Target - This is for CD deployment into the PROD environment
+    # CICD Target - This is for deployment into the PROD environment
     # Models will be created inside schemas specified in the model configs
-    # Target schemas set in the profiles.yml file will be ignored (i.e. no contatenation)
+    # Project level schema settings in profiles.yml will be ignored (i.e. no contatenation)
+    # This target relies on the use of a service account user and private key auth
     prod:
       type: snowflake
       account: "{{ cookiecutter.__SNOWFLAKE_ACCOUNT }}"
