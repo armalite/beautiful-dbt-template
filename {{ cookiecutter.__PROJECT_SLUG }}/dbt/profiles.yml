@@ -58,7 +58,7 @@ default:
       database: "{{ cookiecutter.__WORKSPACE_UAT_DB }}"
       warehouse: "{{ cookiecutter.__WORKSPACE_UAT_WH }}"
 
-      schema: "{{ cookiecutter.WORKSPACE }}"
+      schema: "{{ cookiecutter.__WORKSPACE }}"
       threads: 4
       query_tag: dbt-uat
 
@@ -77,6 +77,6 @@ default:
       database: "{{ cookiecutter.__WORKSPACE_PROD_DB }}"
       warehouse: "{{ cookiecutter.__WORKSPACE_PROD_WH }}"
 
-      schema: "{{ cookiecutter.WORKSPACE }}"
+      schema: "{{ cookiecutter.__WORKSPACE }}"
       threads: 4
       query_tag: dbt-prod
