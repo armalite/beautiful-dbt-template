@@ -1,13 +1,11 @@
 # beautiful-dbt-template
 This repository contains a template DBT project that can be used for DBT development on Snowflake.
 
-
 ## Environment Setup
 The setup script of this repo uses Python Poetry to handle package management and create your virtual environments for development.
 
 ### Prerequisites
- - It is recommended that you work in a Unix environment (i.e. MacOS)
- - Windows machines are also possible but may require further tweaking
+ - It is recommended that you work in a Unix environment (i.e. MacOS or WSL2 on Windows)
  - This repository assumes your Snowflake environments are set up in a particular structure:
    - You work in a single instance of Snowflake (e.g. the Prod instance)
    - Your 'environments' (dev, uat, prod) are simply different databases in the Prod instance
@@ -20,46 +18,26 @@ The setup script of this repo uses Python Poetry to handle package management an
    - Your service accounts can use Private keys for authentication
       - If Private keys have not been set up, you will need to update the dbt `profiles.yml` file to make sure the non development targets use passwords instead
 
-
 ### Environment Setup Steps (Mac or WSL Ubuntu)
-
- 1. Install `pipx` if not already installed: `sudo apt install pipx`
- 2. Install `cookiecutter` using [`pipx`](https://github.com/pipxproject/pipx)
+ 1. Create an empty [repository on GitHub](https://github.com/new) via the UI
+ 2. Install `pipx` if not already installed: `sudo apt install pipx`
+ 3. Install `cookiecutter` using [`pipx`](https://github.com/pipxproject/pipx)
     ```bash
     pipx install cookiecutter
     ```
-
- 3. Use `cookiecutter` to instantiate this template on your local machine
+ 4. Use `cookiecutter` to instantiate this template on your local machine
 
     ```bash
     cookiecutter https://github.com/Armalite/beautiful-dbt-template
     ```
-
- 4. Fill in the information that `cookiecutter` prompts you to add:
-    - **Project Name**: The full name of your project. This is used in documentation and to generate a project slug, which for a given "Project Name" looks like "project-name".
-    - **Description**: A short description which is used in generated documentation.
-    - **Snowflake Account**: The Snowflake account you want your DBT project to connect to.
-    - **Snowflake Username**: The Snowflake username you will connect
-    - **Snowflake Password**: You can set this in an environment variable SNOWFLAKE_PASSWORD and the dbt project will use that for development target(s)
-
-
- 5. After filling out this information, cookiecutter will download poetry dependencies, and initialise your instantiated template as a git repository.
-
- 6. *(Optional)* If you would like to track your changes on GitHub, you will need to [create a remote repository on GitHub](https://github.com/new) for your project. Make sure this remote repository is empty (don't add any templates).
-
-   Once you have set up your remote repository, you can connect it to your local repository following the steps to "push an existing repository from the command-line". These steps should look something like:
-    ```
-    git remote add origin git@github.com:YourUser/<repo-name>.git
-    git branch -M main
-    git push -u origin main
-    ```
-    For example, if my remote repository was https://github.com/Armalite/beautiful-dbt-transforms, the \<repo-name\> would be `beautiful-dbt-transforms` and the command would be:
-    ```
-    git remote add origin git@github.com:Armalite/beautiful-dbt-transforms.git
-    git branch -M main
-    git push -u origin main
-    ```
-
+ 5. Fill in the information that `cookiecutter` prompts you to add:
+    - **PROJECT_NAME**: The full name of your project. This is used in documentation and to generate a project slug, which for a given "Project Name" looks like "project-name".
+    - **DESCRIPTION**: A short description which is used in generated documentation.
+    - **AUTHOR_NAME**: Name of the project author
+    - **SNOWFLAKE_ACCOUNT**: The Snowflake account you want your DBT project to connect to.
+    - **USER_BNAME**: The Snowflake username you will connect
+    - **Remote Git URL**: The full URL to the empty Github repository you have created via the UI
+ 6. After filling out this information, cookiecutter will download poetry dependencies, and initialise your instantiated template as a git repository.
  7. You should now have a .venv virtual environment folder created in your repository folder.
  8. When inside your `dbt/` folder you can run any dbt command within this virtual environment by prefixing your command with `poetry run` e.g. `poetry run dbt run --profiles-dir .`
 
@@ -77,17 +55,5 @@ The setup script of this repo uses Python Poetry to handle package management an
  - To align your project with the template dependencies, run `cruft update`
 
 ## DBT Profile Targets
-The dbt target determines the method of Snowflake connectivity DBT will perform, along with other global settings such as how schema naming should happen when models are run. You can set the DBT target in the environment variable `DBT_TARGET` via `export DBT_TARGET=dev`. You can view the dbt profile config in `dbt/profiles.yml`
- - dev
-   - This dbt target will enable connectivity via your user account and relies on externalbrowser authentication (just click SSO).
-   - This target causes all schemas, by default, to be created under your name prefixed with DEV_. e.g. if your schema settings inside a model definition are set to `FACT`, then these will be created under `DEV_<YOURNAME>_FACT` schema. e.g. `DEV_ADEEB_FACT`
-   - Purpose: This is to enable each engineer to do development, run their models, have tables created, without impacting the objects the other engineers are working on
- - dev_ci
-   - This dbt target will enable connectivity via your user account and relies on externalbrowser authentication (just click SSO).
-   - This target ignores the schema name defined in `profiles.yml` and instead only uses the schema specified provided in your model
-   - This target is the same as the `sandbox` target below, but is for use locally from your laptop to observe the same behaviour
- - uat / prod
-   - These are CICD targets and use the sandbox service account to connect to Snowflake
-   - These targets are to be used when by an automation tool (e.g. TeamCity) deployment
-   - These targets ignore the schema name defined in `profiles.yml` and instead only uses the schema specified provided in your model
+The git repository created by the above steps will contain a README describing all the DBT targets
 

@@ -20,6 +20,9 @@ help:
 clean:
 	sudo rm -rf .venv
 
+install: script-permissions
+	./scripts/install_poetry_unix.sh
+
 script-permissions:
 	find scripts/ -type f -iname "*.sh" -exec chmod 777 {} \;
 	find dbt/ -type f -iname "*.sh" -exec chmod 777 {} \;
