@@ -21,19 +21,19 @@ The setup script of this repo uses Python Poetry to handle package management an
       - If Private keys have not been set up, you will need to update the dbt `profiles.yml` file to make sure the non development targets use passwords instead
 
 
-### Environment Setup Steps (Mac)
+### Environment Setup Steps (Mac or WSL Ubuntu)
  1. Install `cookiecutter` using [`pipx`](https://github.com/pipxproject/pipx)
     ```bash
     pipx install cookiecutter
     ```
 
- 1. Use `cookiecutter` to instantiate this template on your local machine
+ 2. Use `cookiecutter` to instantiate this template on your local machine
 
     ```bash
     cookiecutter git@github.com:Armalite/beautiful-dbt-template.git
     ```
 
- 1. Fill in the information that `cookiecutter` prompts you to add:
+ 3. Fill in the information that `cookiecutter` prompts you to add:
     - **Project Name**: The full name of your project. This is used in documentation and to generate a project slug, which for a given "Project Name" looks like "project-name".
     - **Description**: A short description which is used in generated documentation.
     - **Snowflake Account**: The Snowflake account you want your DBT project to connect to.
@@ -41,9 +41,9 @@ The setup script of this repo uses Python Poetry to handle package management an
     - **Snowflake Password**: You can set this in an environment variable SNOWFLAKE_PASSWORD and the dbt project will use that for development target(s)
 
 
- 1. After filling out this information, cookiecutter will download poetry dependencies, and initialise your instantiated template as a git repository.
+ 4. After filling out this information, cookiecutter will download poetry dependencies, and initialise your instantiated template as a git repository.
 
-1. *(Optional)* If you would like to track your changes on GitHub, you will need to [create a remote repository on GitHub](https://github.com/new) for your project. Make sure this remote repository is empty (don't add any templates).
+ 5. *(Optional)* If you would like to track your changes on GitHub, you will need to [create a remote repository on GitHub](https://github.com/new) for your project. Make sure this remote repository is empty (don't add any templates).
 
    Once you have set up your remote repository, you can connect it to your local repository following the steps to "push an existing repository from the command-line". These steps should look something like:
     ```
@@ -58,13 +58,9 @@ The setup script of this repo uses Python Poetry to handle package management an
     git push -u origin main
     ```
 
- 1. *(Optional)* Edit the `pyproject.toml` file to add an author for Poetry to set
- 1. Check that Poetry has been added to your bashrc or zshrc. e.g. Run `cat ~/.zshrc` and ensure the following line is present: `export PATH="$HOME/.poetry/bin:$PATH"`
- 1. Restart your terminal/shell and ensure Poetry is installed `poetry --version`.
- 1. You should now have a .venv virtual environment folder created in your repository folder.
- 1. When inside your `dbt/` folder you can run any dbt command within this virtual environment by prefixing your command with `poetry run` e.g. `poetry run dbt run --profiles-dir .`
+ 6. You should now have a .venv virtual environment folder created in your repository folder.
+ 7. When inside your `dbt/` folder you can run any dbt command within this virtual environment by prefixing your command with `poetry run` e.g. `poetry run dbt run --profiles-dir .`
 
- ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) If running `poetry --version` fails after step `6.` above, run `make install` again
 
 ### Re-install Poetry
  - You can re-install poetry by simply running `make install`
