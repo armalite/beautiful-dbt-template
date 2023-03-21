@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "Please enter the remote Git URL:"
-read REMOTE_URL
-
 # Detect the OS and WSL2
 OS=$(uname -s)
 WSL2=false
@@ -28,13 +25,6 @@ poetry update
 
 echo "Installing Poetry dependencies"
 poetry install
-
-# Initialize git repo, commit, and push to remote
-git init
-git add .
-git commit -m "Initialise Beautiful DBT Template"
-git remote add origin $REMOTE_URL
-git push -u origin master
 
 echo "Installation complete. Activate the virtual environment with 'poetry shell' or run any command preceded with 'poetry run'."
 

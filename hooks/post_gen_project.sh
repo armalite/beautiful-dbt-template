@@ -34,7 +34,7 @@ git init
 git add .
 git commit -m "Initialise Beautiful DBT Template"
 git remote add origin $REMOTE_URL
-git push -u origin master
+git push -u origin main
 
 echo "Installation complete. Activate the virtual environment with 'poetry shell' or run any command preceded with 'poetry run'."
 
