@@ -30,7 +30,7 @@ default:
     # This target relies on the use of a service account user and private key auth
     dev_ci:
       type: snowflake
-      account: "{{ cookiecutter.__SNOWFLAKE_ACCOUNT }}"
+      account: "{{ cookiecutter.SNOWFLAKE_ACCOUNT }}"
 
       user: "{{ cookiecutter.__WORKSPACE_DEV_SA }}"
       private_key_path: "{{ cookiecutter._KEY_PATH }}"
@@ -49,7 +49,7 @@ default:
     # This target relies on the use of a service account user and private key auth
     uat:
       type: snowflake
-      account: "{{ cookiecutter.__SNOWFLAKE_ACCOUNT }}"
+      account: "{{ cookiecutter.SNOWFLAKE_ACCOUNT }}"
 
       user: "{{ cookiecutter.__WORKSPACE_UAT_SA }}"
       private_key_path: "{{ cookiecutter._KEY_PATH }}"
@@ -68,7 +68,7 @@ default:
     # This target relies on the use of a service account user and private key auth
     prod:
       type: snowflake
-      account: "{{ cookiecutter.__SNOWFLAKE_ACCOUNT }}"
+      account: "{{ cookiecutter.SNOWFLAKE_ACCOUNT }}"
 
       user: "{{ cookiecutter.__WORKSPACE_PROD_SA }}"
       private_key_path: "{{ cookiecutter._KEY_PATH }}"

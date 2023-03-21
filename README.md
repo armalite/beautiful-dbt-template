@@ -22,18 +22,20 @@ The setup script of this repo uses Python Poetry to handle package management an
 
 
 ### Environment Setup Steps (Mac or WSL Ubuntu)
- 1. Install `cookiecutter` using [`pipx`](https://github.com/pipxproject/pipx)
+
+ 1. Install `pipx` if not already installed: `sudo apt install pipx`
+ 2. Install `cookiecutter` using [`pipx`](https://github.com/pipxproject/pipx)
     ```bash
     pipx install cookiecutter
     ```
 
- 2. Use `cookiecutter` to instantiate this template on your local machine
+ 3. Use `cookiecutter` to instantiate this template on your local machine
 
     ```bash
-    cookiecutter git@github.com:Armalite/beautiful-dbt-template.git
+    cookiecutter https://github.com/Armalite/beautiful-dbt-template
     ```
 
- 3. Fill in the information that `cookiecutter` prompts you to add:
+ 4. Fill in the information that `cookiecutter` prompts you to add:
     - **Project Name**: The full name of your project. This is used in documentation and to generate a project slug, which for a given "Project Name" looks like "project-name".
     - **Description**: A short description which is used in generated documentation.
     - **Snowflake Account**: The Snowflake account you want your DBT project to connect to.
@@ -41,9 +43,9 @@ The setup script of this repo uses Python Poetry to handle package management an
     - **Snowflake Password**: You can set this in an environment variable SNOWFLAKE_PASSWORD and the dbt project will use that for development target(s)
 
 
- 4. After filling out this information, cookiecutter will download poetry dependencies, and initialise your instantiated template as a git repository.
+ 5. After filling out this information, cookiecutter will download poetry dependencies, and initialise your instantiated template as a git repository.
 
- 5. *(Optional)* If you would like to track your changes on GitHub, you will need to [create a remote repository on GitHub](https://github.com/new) for your project. Make sure this remote repository is empty (don't add any templates).
+ 6. *(Optional)* If you would like to track your changes on GitHub, you will need to [create a remote repository on GitHub](https://github.com/new) for your project. Make sure this remote repository is empty (don't add any templates).
 
    Once you have set up your remote repository, you can connect it to your local repository following the steps to "push an existing repository from the command-line". These steps should look something like:
     ```
@@ -58,8 +60,8 @@ The setup script of this repo uses Python Poetry to handle package management an
     git push -u origin main
     ```
 
- 6. You should now have a .venv virtual environment folder created in your repository folder.
- 7. When inside your `dbt/` folder you can run any dbt command within this virtual environment by prefixing your command with `poetry run` e.g. `poetry run dbt run --profiles-dir .`
+ 7. You should now have a .venv virtual environment folder created in your repository folder.
+ 8. When inside your `dbt/` folder you can run any dbt command within this virtual environment by prefixing your command with `poetry run` e.g. `poetry run dbt run --profiles-dir .`
 
 
 ### Re-install Poetry
