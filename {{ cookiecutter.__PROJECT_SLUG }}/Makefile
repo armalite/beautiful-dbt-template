@@ -20,51 +20,14 @@ help:
 clean:
 	sudo rm -rf .venv
 
-install:
-	/bin/bash ./scripts/setup/poetry_install.sh
-
 script-permissions:
 	find scripts/ -type f -iname "*.sh" -exec chmod 777 {} \;
 	find dbt/ -type f -iname "*.sh" -exec chmod 777 {} \;
 	find dbt/scripts -type f -iname "*.sh" -exec chmod 777 {} \;
 
-generate-profile:
-	cd scripts/dbt_generator; poetry run python -m src.generate_profile
-###############################################################################
-# XADE Data Vault - LOCAL DBT command targets
-# These targets execute dbt commands on any of our data vault constructs
-#
-###############################################################################
 # Runs all the dbt models in the repo except for the example models prefixed with zzz_
-dbt-run: script-permissions
-	cd dbt; poetry run ./scripts/dbt_run_all.sh
+dbt-run:
+	cd dbt && poetry run dbt deps && poetry run dbt run --full-refresh --exclude ./models/examples/zzz_example_test_model/ --profiles-dir .
 
 dbt-deps:
-	cd dbt; poetry run dbt deps
-
-
-###############################################################################
-# Test Targets
-#
-###############################################################################
-test: test-functional test-unit
-	echo "$(bold)=== Run all tests ===$(sgr0)"
-
-test-unit:
-	echo "$(bold)=== Running unit tests ===$(sgr0)"
-	#pytest --capture=no --doctest-modules -m unit --user=$(user) --password=$(password) --account=$(account) --prefix=$(prefix) --environment=$(env) tests/
-
-test-functional:
-	echo "$(bold)=== Running functional tests ===$(sgr0)"
-
-test-end-to-end:
-	echo "$(bold)=== Running end-to-end tests ===$(sgr0)"
-	#pytest --capture=no --doctest-modules -m end_to_end --user=$(user) --password=$(password) --account=$(account) --prefix=$(prefix) --environment=$(env) tests/
-
-test-pre-deployment:
-	echo "$(bold)=== Running pre-deployment tests ===$(sgr0)"
-	#pytest --capture=no --doctest-modules -m pre_deployment --user=$(user) --password=$(password) --account=$(account) --prefix=$(prefix) --environment=$(env) tests/
-
-test-post-deployment:
-	echo "$(bold)=== Running post-deployment tests ===$(sgr0)"
-	#pytest --capture=no --doctest-modules -m post_deployment --user=$(user) --password=$(password) --account=$(account) --prefix=$(prefix) --environment=$(env) tests/
+	cd dbt && poetry run dbt deps
