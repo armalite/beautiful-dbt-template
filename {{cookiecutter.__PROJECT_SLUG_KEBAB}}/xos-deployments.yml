@@ -1,0 +1,36 @@
+##################
+# EXAMPLE CONFIG #
+##################
+
+# For more information on how to fill out the config:
+# - See the README
+# - Follow this User Guide: https://xero.atlassian.net/wiki/spaces/DATATEAM/pages/269755945637/XOS+-+User+Guide+-+Prefect+Deployer
+
+configVersion: beta1
+
+jobType: DBT
+
+projectPath: "dbt"
+
+deployments:
+- name: sandbox_deployment
+  flowName: my-dbt-project-sandbox
+  dbtTarget: "sandbox"
+  prefectWorkspace: shared-flows-sandbox
+  prefectProject: my-data-product-sandbox
+  prefectTenant: xero-sandbox
+  scheduleCron: "0 */12 * * *"
+  command: "dbt deps;dbt run --profiles-dir . --select models/examples/"
+  runOnPush: true
+  slackWebhookUrl: "https://hooks.slack.com/services/"
+  branch: "main"
+- name: sandbox_ci_deployment
+  dbtTarget: "sandbox_ci"
+  flowName: my-dbt-ci-job-${branch}
+  prefectWorkspace: shared-flows-sandbox
+  prefectProject: my-data-product-sandbox
+  prefectTenant: xero-sandbox
+  command: "dbt deps && dbt run --profiles-dir . --select models/examples/ && dbt test --profiles-dir . --select models/example/"
+  runOnPush: true
+  slackWebhookUrl: "https://hooks.slack.com/services/"
+  branch: "!main"

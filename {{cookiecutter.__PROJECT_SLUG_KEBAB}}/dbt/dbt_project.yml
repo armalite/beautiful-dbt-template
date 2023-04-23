@@ -1,0 +1,19 @@
+name: {{cookiecutter.__PROJECT_SLUG_SNAKE}}
+version: '0.1.0'
+config-version: 2
+profile: 'default'
+require-dbt-version: [">=1.0.0", "<2.0.0"]
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+target-path: "target" # directory which will store compiled SQL files
+clean-targets: # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_modules"
+vars:
+  hash: SHA
+models:
+  +materialized: table
+
+# Add on-run-end hooks here 

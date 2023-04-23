@@ -1,0 +1,9 @@
+
+version: 2
+
+models:
+  - name: example_model
+    description: 'An example dbt model that unions two hardcoded rows'
+    config:
+      meta: 
+        gdpr_sensitivity: Confidential
