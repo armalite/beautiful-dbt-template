@@ -1,14 +1,13 @@
 version: 2
 
 sources:
-  - name: myxero_c2
-    database: "CURATED"
-    schema: C2
-    loaded_at_field: ingestion_timestamp
+  - name: some_source
+    database: "EXAMPLE"
+    schema: SOME_SCHEMA
+    loaded_at_field: loadtime
     tables:
       - name: organisation
-        identifier: ORCHESTRATION_CDC_MYXERO_DBO_ORGANISATION_V3
+        identifier: actual_organisation_table_name
       - name: user
-        identifier: ORCHESTRATION_CDC_MYXERO_DBO_USER_V2
-      - name: contact
-        identifier: ORCHESTRATION_CDC_MYXERO_DBO_CONTACT_V2
+        identifier: actual_user_table_name
+
