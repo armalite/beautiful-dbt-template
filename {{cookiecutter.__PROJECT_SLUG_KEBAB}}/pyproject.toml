@@ -2,7 +2,7 @@
 name = "{{ cookiecutter.__PROJECT_SLUG_SNAKE }}"
 version = "0.1.0"
 description = "{{ cookiecutter.DESCRIPTION }}"
-authors = ["{{ cookiecutter.POD_NAME }} <{{ cookiecutter.POD_EMAIL }}>"]
+authors = ["{{ cookiecutter.TEAM_NAME }} <{{ cookiecutter.TEAM_EMAIL }}>"]
 
 [tool.poetry.dependencies]
 python = ">=3.9.0, <3.12"
@@ -16,7 +16,7 @@ sqlfluff = "^0.8.0"
 sqlfluff-templater-dbt = "^0.8.0"
 
 [tool.cruft]
-skip = ["dbt/*", "Makefile", "README.md", "pyproject.toml", "xos-deployments.yml", ".gitignore"]
+skip = ["dbt/*", "Makefile", "README.md", "pyproject.toml", ".gitignore"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "setuptools"]
