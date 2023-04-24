@@ -8,7 +8,7 @@ repository, **editing these files may result in merge conflicts when using
 
 ## Retrieving updates from the [Beautiful DBT template](https://github.com/Armalite/beautiful-dbt-template)
 
-Updates from the XTS DBT template are added to your local machine using:
+Updates from the Beau DBT template are added to your local machine using:
 
 ```bash
 cruft update
