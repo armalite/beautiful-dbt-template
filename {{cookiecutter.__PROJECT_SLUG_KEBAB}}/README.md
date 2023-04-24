@@ -1,5 +1,6 @@
 # {{cookiecutter.PROJECT_NAME}}
 
+{{ cookiecutter.DESCRIPTION }}
 
 
 ## DBT Profile Targets
@@ -16,16 +17,3 @@ The dbt target determines the method of Snowflake connectivity DBT will perform,
    - These are CICD targets and use the sandbox service account to connect to Snowflake
    - These targets are to be used when by an automation tool (e.g. TeamCity) deployment
    - These targets ignore the schema name defined in `profiles.yml` and instead only uses the schema specified provided in your model
-
-
-### Re-install Poetry
- - You can re-install poetry by simply running `make install`
- - To do a clean install of poetry:
-  ```bash
-  make clean install
-  ```
-
-## Update Poetry Dependencies
- - You are welcome to manually update Poetry dependencies by editing the `pyproject.toml` file
- - After editing the file you can run `poetry update` to align versions and dependencies
- - To align your project with the template dependencies, run `cruft update`

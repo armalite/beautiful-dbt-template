@@ -1,9 +1,9 @@
 version: 2
 
 sources:
-  - name: some_source
+  - name: table_ref
     database: "EXAMPLE"
-    schema: SOME_SCHEMA
+    schema: some_schema
     loaded_at_field: loadtime
     tables:
       - name: organisation
