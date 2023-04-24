@@ -60,9 +60,8 @@ You can begin these steps once you meet all above prerequisites
      for your dbt `profiles.yml`
    - **Description**: A short description which is used in generated
      documentation.
-   - **Pod Name**: The name of the pod who owns this repository
-   - **Pod Email**: An email that links back to your pod (if you don't have one,
-     feel free to make up one)
+   - **Team Name**: The name of your team (leave blank or invent one if not available)
+   - **Team Email**: Team email of your team (leave blank or invent one if not available)
    - **AUTHOR_NAME**: Name of the project author
    - **SNOWFLAKE_ACCOUNT**: The Snowflake account you want your DBT project to connect to.
    - **USER_NAME**: The Snowflake username you will connect
