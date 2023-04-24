@@ -5,7 +5,7 @@ if [ -d .git ]; then
 else
   git init
   git add . >/dev/null
-  git commit -m "Instantiate XTS Template" --quiet
+  git commit -m "Instantiate Beau DBT Template" --quiet
 fi
 
 if !(git remote | grep -q .); then \
@@ -13,7 +13,7 @@ if !(git remote | grep -q .); then \
   echo "Creating GitHub Repository"
   echo "=========================="
   echo ""
-  echo "If you do not already have a remote repository in GitHub, create one here: https://github.dev.xero.com/new"
+  echo "If you do not already have a remote repository in GitHub, create one here: https://github.com/new"
   echo ""
   echo "Skipping this step means you will only have a local git repository. You can set up a remote repository later if need be."
   echo ""

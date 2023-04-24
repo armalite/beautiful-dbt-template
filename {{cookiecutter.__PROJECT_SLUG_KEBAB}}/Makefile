@@ -9,9 +9,9 @@ output_location = "output"
 MAKEFLAGS += --warn-undefined-variables
 .DEFAULT_GOAL := help
 
-# Includes XTS managed targets in your Makefile
+# Includes template managed targets in your Makefile
 # Use `make help` for more details
-include .xts/Makefile
+include .beau/Makefile
 
 ###############################################################################
 # 

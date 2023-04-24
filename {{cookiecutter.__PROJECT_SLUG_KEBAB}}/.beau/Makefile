@@ -3,7 +3,7 @@ help:
 	@echo "Usage: make [target]"
 	@echo ""
 	@echo "Available Makefile targets:"
-	@grep '.PHONY: .*' .xts/Makefile | grep -v 'grep' | sed 's/\.PHONY: \(.*\) # \(.*\)/\1\t\2/' | expand -t20
+	@grep '.PHONY: .*' .beau/Makefile | grep -v 'grep' | sed 's/\.PHONY: \(.*\) # \(.*\)/\1\t\2/' | expand -t20
 
 ###############################################################################
 # Environment Setup Targets
@@ -15,22 +15,19 @@ clean:
 	rm -f poetry.lock
 
 intro: 
-	@echo " __  _______ ____    ___           _        _ _           ";
-	@echo " \ \/ /_   _/ ___|  |_ _|_ __  ___| |_ __ _| | | ___ _ __ ";
-	@echo "  \  /  | | \___ \   | || '_ \/ __| __/ _\` | | |/ _ \ '__|";
-	@echo "  /  \  | |  ___) |  | || | | \__ \ || (_| | | |  __/ |   ";
-	@echo " /_/\_\ |_| |____/  |___|_| |_|___/\__\__,_|_|_|\___|_|   ";
-	@echo "                                                          ";
+	@echo " | _ ) ___ __ _ _  _  |_ _|_ _  __| |_ __ _| | |___ _ _  "
+	@echo " | _ \/ -_) _` | || |  | || ' \(_-<  _/ _` | | / -_) '_| "
+	@echo " |___/\___\__,_|\_,_| |___|_||_/__/\__\__,_|_|_\___|_|  "
 
 .git: intro
-	./.xts/scripts/git_init.sh
+	./.beau/scripts/git_init.sh
 
 .venv:
 	@echo ""
 	@echo "Installing Poetry Dependencies"	
 	@echo "=============================="
 	@echo ""
-	/bin/bash ./.xts/scripts/install_poetry.sh
+	/bin/bash ./.beau/scripts/install_poetry.sh
 
 .PHONY: install # Initiate git repository, install dependencies
 install: .git .venv 
@@ -42,30 +39,3 @@ script-permissions:
 	find scripts/ -type f -iname "*.sh" -exec chmod 777 {} \;
 	find dbt/ -type f -iname "*.sh" -exec chmod 777 {} \;
 	find dbt/scripts -type f -iname "*.sh" -exec chmod 777 {} \;
-
-
-###############################################################################
-# Test Targets
-#
-###############################################################################
-test: test-functional test-unit
-	echo "$(bold)=== Run all tests ===$(sgr0)"
-
-test-unit:
-	echo "$(bold)=== Running unit tests ===$(sgr0)"
-	#pytest --capture=no --doctest-modules -m unit --user=$(user) --password=$(password) --account=$(account) --prefix=$(prefix) --environment=$(env) tests/
-
-test-functional:
-	echo "$(bold)=== Running functional tests ===$(sgr0)"
-
-test-end-to-end:
-	echo "$(bold)=== Running end-to-end tests ===$(sgr0)"
-	#pytest --capture=no --doctest-modules -m end_to_end --user=$(user) --password=$(password) --account=$(account) --prefix=$(prefix) --environment=$(env) tests/
-
-test-pre-deployment:
-	echo "$(bold)=== Running pre-deployment tests ===$(sgr0)"
-	#pytest --capture=no --doctest-modules -m pre_deployment --user=$(user) --password=$(password) --account=$(account) --prefix=$(prefix) --environment=$(env) tests/
-
-test-post-deployment:
-	echo "$(bold)=== Running post-deployment tests ===$(sgr0)"
-	#pytest --capture=no --doctest-modules -m post_deployment --user=$(user) --password=$(password) --account=$(account) --prefix=$(prefix) --environment=$(env) tests/

@@ -9,4 +9,4 @@ repos:
           stages: [commit]
           types: [sql]
           pass_filenames: true
-          args: [".xts/scripts/check-file-name.sh"]
+          args: [".beau/scripts/check-file-name.sh"]
