@@ -16,7 +16,7 @@ cruft update
 
 If you do not have `cruft` installed on your machine, follow the "Environment
 Setup Steps" in the
-[Template README.md](https://github.dev.xero.com/Xero/DT.XADE.DBT-Template/blob/main/README.md)
+[Beautiful DBT template](https://github.com/Armalite/beautiful-dbt-template/blob/main/README.md)
 
 ## Checking for updates from the [Beautiful DBT template](https://github.com/Armalite/beautiful-dbt-template)
 
