@@ -120,16 +120,18 @@ _(Optional)_ *This step is optional and only needed if you skipped providing the
 ### Troubleshooting
 
 #### Poetry did not install
-![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) If `poetry --version` does not work:
-  - Check that Poetry has been install at a particular location: `where poetry`
+If `poetry --version` does not work, try these steps in the following order until one of these steps succeed:
+  - Restart the terminal and try `poetry --version` again
+  - Run `make install` again
+  - Do a clean installation with `make clean install`
+  - Force a poetry installation with `make force-install`
+
+#### Poetry not in path
+If `poetry --version` does not work, but you are sure poetry has been installed, then it is possible Poetry did not get added to your path.
+- Check that Poetry has been install at a particular location: `where poetry`
   - You can add the above location to the path by appending your zsh or bash file (Depending on the shell you use) with:
   `export PATH="X:$PATH"`
   Replacing X with the location outputed by `where poetry`
-
-![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) If running
-`poetry --version` still fails, try to run `make install` again
-
-#### Poetry not in path
 
 ### Re-installing Poetry
 
