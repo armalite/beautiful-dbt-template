@@ -57,7 +57,7 @@ You can begin these steps once you meet all above prerequisites
    - **Project Name**: The full name of your project. This is used in
      documentation and to generate a project slug, which for a given "Project
      Name" looks like "project-name". This is also used to generate database names
-     for your dbt `profiles.yml`
+     for your dbt `profiles.yml` as well as your repo folder
    - **Description**: A short description which is used in generated
      documentation.
    - **Team Name**: The name of your team (leave blank or invent one if not available)
@@ -69,8 +69,7 @@ You can begin these steps once you meet all above prerequisites
 4. Next, use the installer inside the your new project folder to set up your repo and install
    basic dependencies.
 
-   First, navigate to the project directory that has just been created, using
-   `cd`. For example, if your project is called `my-data-product`:
+   First, navigate to the project directory that has just been created. For example, if your project is called `my-data-product`:
 
    ```bash
    cd my-data-product
@@ -88,7 +87,17 @@ You can begin these steps once you meet all above prerequisites
    - Prompts you for the URL to your remote Github repo (created in *step 1*) so that it can connect to it
    - Installs all the dependencies needed to run DBT
 
-5. _(Optional)_ *This step is optional and only needed if you skipped providing the Github URL in step 4*.
+5. Restart your terminal/shell and ensure Poetry is installed
+   `poetry --version`.
+
+When inside your `dbt/` folder you can run any dbt command within this virtual
+environment by prefixing your command with `poetry run` e.g.
+`poetry run dbt run --profiles-dir .`
+
+
+
+### (Optional) Connecting your remote repo
+_(Optional)_ *This step is optional and only needed if you skipped providing the Github URL in step 4*.
    If for some reason you did not provide the URL to your Github repo during step 4, you can still 
    manually connect to your remote repository following the steps to "push an existing repository 
    from the command-line". These steps should look something like:
@@ -108,13 +117,9 @@ You can begin these steps once you meet all above prerequisites
    git push -u origin main
    ```
 
-6. Restart your terminal/shell and ensure Poetry is installed
-   `poetry --version`.
+### Troubleshooting
 
-When inside your `dbt/` folder you can run any dbt command within this virtual
-environment by prefixing your command with `poetry run` e.g.
-`poetry run dbt run --profiles-dir .`
-
+#### Poetry did not install
 ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) If `poetry --version` does not work:
   - Check that Poetry has been install at a particular location: `where poetry`
   - You can add the above location to the path by appending your zsh or bash file (Depending on the shell you use) with:
@@ -123,6 +128,8 @@ environment by prefixing your command with `poetry run` e.g.
 
 ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) If running
 `poetry --version` still fails, try to run `make install` again
+
+#### Poetry not in path
 
 ### Re-installing Poetry
 
