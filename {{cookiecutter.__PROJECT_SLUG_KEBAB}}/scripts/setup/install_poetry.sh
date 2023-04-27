@@ -1,5 +1,14 @@
 #!/bin/sh
 
+FORCE_INSTALL=0
+
+for arg in "$@"
+do
+    if [[ "$arg" == "--force" ]]; then
+        FORCE_INSTALL=1
+    fi
+done
+
 echo "Checking OS"
 unameOut="$(uname -s)"
 case "${unameOut}" in
@@ -10,10 +19,42 @@ case "${unameOut}" in
 esac
 echo "User machine is running ${machine}"
 
+install_poetry_other () {
+    if [[ "$FORCE_INSTALL" -eq 1 ]]; then
+        echo "Forcing Poetry installation"
+        if curl -sSL https://install.python-poetry.org | python3 - --force;
+        then echo "Success! Poetry has been force installed"
+        else echo "Poetry force installation failed."
+        fi;
+    else
+        if curl --fail -sSL https://install.python-poetry.org | python3 -;
+        then echo "Success! Poetry has been installed"
+        else echo "Poetry installation failed."
+        fi;
+    fi
+}
+
+install_poetry_windows () {
+    if [[ "$FORCE_INSTALL" -eq 1 ]]; then
+        echo "Forcing Poetry installation"
+        if curl -sSL https://install.python-poetry.org | python - --force;
+        then echo "Success! Poetry has been force installed"
+        else echo "Poetry force installation failed."
+        fi;
+    else
+        if curl --fail -sSL https://install.python-poetry.org | python -;
+        then echo "Poetry installed"
+        else echo "Poetry install failed."
+        fi;
+    fi
+}
+
 poetry_install () {
-    if curl --fail -sSL https://install.python-poetry.org | python3 -;
-    then echo "Success! Poetry has been installed"
-    else echo "Poetry installation failed."
+    if [[ "${machine}" == "MinGw" ]];
+    then
+        install_poetry_windows
+    else
+        install_poetry_other
     fi;
 }
 
@@ -30,8 +71,15 @@ check_path_set () {
 check_install () {
     echo "Checking if you have poetry on your machine"
     if command -v poetry &> /dev/null;
-    then echo "Poetry is already installed.";
-    else echo "Can't find poetry so installing poetry on your machine now"
+    then
+        if [[ "$FORCE_INSTALL" -eq 1 ]]; then
+            echo "Forcing Poetry installation"
+            poetry_install
+        else
+            echo "Poetry is already installed."
+        fi
+    else
+        echo "Can't find poetry so installing poetry on your machine now"
         poetry_install
     fi;
 }
@@ -45,8 +93,8 @@ check_path_set
 # Set poetry to create the virtual environment in the project folder
 poetry config --local virtualenvs.in-project true
 
-# Apply updates to poetry lock file
-poetry update
-
 echo "Installing Poetry dependencies"
 poetry install
+
+git add poetry.lock
+git diff-index --quiet --cached HEAD || git commit -m "Update \`poetry.lock\`"
