@@ -133,15 +133,9 @@ If `poetry --version` does not work, but you are sure poetry has been installed,
   `export PATH="X:$PATH"`
   Replacing X with the location outputed by `where poetry`
 
-### Re-installing Poetry
+### Re-create the venv
 
-You can re-install poetry by running:
-
-```bash
-make install
-```
-
-And you can do a clean install of poetry by running:
+You can reinstall the Poetry virtual environment with the following command:
 
 ```bash
 make clean install
