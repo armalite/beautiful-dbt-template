@@ -29,10 +29,19 @@ intro:
 	@echo ""
 	/bin/bash ./.beau/scripts/install_poetry.sh
 
+
 .PHONY: install # Initiate git repository, install dependencies
 install: .git .venv 
 	@echo ''
 	@echo 'If you would like to do a fresh install of dependencies, run `make clean install`'
+
+.PHONY: force-install # Removes venv, attempts git init, then force installs Poetry
+force-install: clean .git
+	@echo ""
+	@echo "Forcing Poetry Installation"	
+	@echo "=============================="
+	@echo ""
+	/bin/bash ./.beau/scripts/install_poetry.sh --force
 
 .PHONY: script-permissions # Set all script permissions to chmod 777
 script-permissions: 
